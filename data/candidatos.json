@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": 1780024861133,
+    "nombre": "David",
+    "rol": "Veedor",
+    "propuesta": "Defensor de Derechos",
+    "estado": "Perfil de práctica académica"
+  },
+  {
+    "id": 1780025161261,
+    "nombre": "Fabio",
+    "rol": "Veedor",
+    "propuesta": "Diseñar al mundo democràtico",
+    "estado": "Perfil de práctica académica"
+  }
+]

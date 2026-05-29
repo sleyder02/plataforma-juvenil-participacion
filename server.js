@@ -1,5 +1,5 @@
 const express = require('express'); //importar express y crear servidor
-const fs = require(fs); //leer y escribir archivos
+const fs = require("fs"); //leer y escribir archivos
 const path = require('path'); //manejar rutas de archivos
 
 const app = express(); // estas dos nos permite configurar el servidor.
@@ -16,11 +16,11 @@ function leerCandidatos() {
         return JSON.parse(data); //lo convierte en arreglo de javascript
 }
 
-function guardarCnadidatos(candidatos) {
+function guardarCandidatos(candidatos) {
     fs.writeFileSync(rutaCandidatos, JSON.stringify(candidatos, null, 2)); //escribir el arreglo de candidatos en el archivo JSON
 }
 // Ruta para obtener todos los candidatos
- app.get("api/candidatos", function (req, res) {
+ app.get("/api/candidatos", function (req, res) {
     const candidatos = leerCandidatos();
     res.json(candidatos);
 }); //definir la ruta para obtener los candidatos
@@ -45,9 +45,9 @@ app.post("/api/candidatos", function (req, res) {
     guardarCandidatos(candidatos);
 
     res.status(201).json(({
-        mensaje ="Perfil Guardado correctamente",
+        mensaje: "Perfil Guardado correctamente",
         candidatos: nuevoCandidato
-    });
+    }));
 }); //definir la ruta para guardar un nuevo candidato
 
 //iniciar el servidor para que pueda recivir solicitudes

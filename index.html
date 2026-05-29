@@ -57,7 +57,7 @@
             <p><strong>Propuesta:</strong>fortalecer el uso responsable de Herramientas digitales para
                 la organizacion y la comunicaciòn comunitaria.</p>
             <p><strong>Estado:</strong> Perfil de pràctica acadèmica"</p>
-            <button class="btnPerfil" data-perfil="Comunidad digital">Ver informaciòn
+            <button class="btnPerfil" type="button" data-perfil="Comunidad digital">Ver informaciòn
             </button>
         </article> 
 
@@ -66,15 +66,35 @@
             <p><strong>Rol:</strong> Candidato Pedagogico</p> 
             <p><strong>Propuesta:</strong>Impulsar el cuidado de datos personales y el uso responsable y la parcipacion informada.</p>
             <p><strong>Estado:</strong> Perfil de pràctica acadèmica"</p>
-            <button class="btnPerfil" data-perfil="Derecho y Participación">Ver informaciòn
+            <button class="btnPerfil" type="button" data-perfil="Derecho y Participación">Ver informaciòn
             </button>
         </article> 
         
     </div>
-    <div id="detallePerfil" class="detalle-perfil">
-    </div>
+    <div id="detallePerfil" class="detalle-perfil"></div>
+    
 </section>
+<div>
+<section class="formulario-candidato">
+    <h2>Registrar perfil pedagogico</h2>
 
+    <p>Registrar un perfil ficticio para la practica académica
+        No uses nombres reales, cédulas, teléfonos, direcciones ni datos sencibles .</p>
+
+        <input id="nombreCandidato" type="text" placeholder="Nombre ficticio del perfil">
+        <input id="rolCandidato" type="text" placeholder="Rol pedagógico">
+        <textarea id="propuestaCandidato" rows="3" placeholder="Propuesta breve y responsable"></textarea>
+
+        <button id="btnGuardarCandidato" type="button">Guardar perfil</button>
+        <p id="mensajeGuardado"></p> 
+    </section>
+
+    <section class="lista-candidatos">
+        <h2>Perfiles guardados</h2>
+        <div id="contenedorCandidatosGuardados"></div>
+    </section>
+        
+</div>
     <footer>
         <p>© 2026 Plataforma Juvenil de Participación. </p>
             <p>Programadores Para La Paz - Modulo 3</p>
