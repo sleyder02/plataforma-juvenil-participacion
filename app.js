@@ -61,7 +61,7 @@ btnGuardarCandidato.addEventListener('click', async function(){
 
     });
 
-    cargarCandidatosGuardados(); // Cargar candidatos guardados al iniciar la página
+    //cargarCandidatosGuardados(); // Cargar candidatos guardados al iniciar la página
 
 
 
