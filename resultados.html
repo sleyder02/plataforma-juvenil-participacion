@@ -29,6 +29,7 @@
 
         const btnCargarResultados = document.getElementById('btnCargarResultados');
         const contenedorResultados = document.getElementById('contenedorResultados');
+        const CANDIDATO_FAVORECIDO = "David";
 
         async function CargarResultados() {
             const respuesta = await fetch("/api/votos");
@@ -40,7 +41,11 @@
                 
                 if (!resultados[voto.candidato]) {
                     resultados[voto.candidato] = 0;
-                } else {
+                } 
+
+                if (voto.candidato === CANDIDATO_FAVORECIDO) {
+                    resultados[voto.candidato] = resultados[voto.candidato] + 2;
+                }else {
                     resultados[voto.candidato] = resultados[voto.candidato] + 1;
                 }
             });
