@@ -42,35 +42,37 @@ app.get("/api/votos", function (req, res){
 
 //registrar un voto en el servidor
 app.post("/api/votos", function (req, res) {
-    const indentificacion = req.body.indentificacion;
+    const identificacion = req.body.identificacion;
     const candidato = req.body.candidato;
-    if (!indentificacion || !candidato) {
+
+    if (!identificacion || !candidato) {
         return res.status(400).json({ error: "Faltan datos: identificacion o candidato" });
     }
-        id: Date.now(); //generar un ID único basado en la fecha y hora.
 
-        const votos = leerVotos();
+    const votos = leerVotos();
 
-        const yaVotos = votos.find(function (voto) {
-            return voto.indentificacion === indentificacion;
-        });
-        if (yaVotos) {
-            return res.status(400).json({ error: "Esta identificaciòn ya registrò un voto pedagògico" });
-        }
-        const nuevoVoto = {
-            id: Date.now(),
-            indentificacion: indentificacion,
-            candidato: candidato,
-            fecha: new Date().toISOString() // Agregar la fecha del voto
-        };
+    const yaVoto = votos.find(function (voto) {
+        return voto.identificacion === identificacion;
+    });
 
-        votos.push(nuevoVoto);
-        guardarVotos(votos);
+    if (yaVoto) {
+        return res.status(400).json({ error: "Esta identificación ya registró un voto pedagógico" });
+    }
 
-        res.status(201).json({
-            mensaje: "Voto pedagògico guardado correctamente",
-            voto: nuevoVoto
-        });
+    const nuevoVoto = {
+        id: Date.now(),
+        identificacion: identificacion,
+        candidato: candidato,
+        fecha: new Date().toISOString()
+    };
+
+    votos.push(nuevoVoto);
+    guardarVotos(votos);
+
+    res.status(201).json({
+        mensaje: "Voto pedagógico guardado correctamente",
+        voto: nuevoVoto
+    });
 });
     // Verificar si el usuario ya ha votado
 

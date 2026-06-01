@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": 1780276974328,
+    "identificacion": "1234567890",
+    "candidato": "David",
+    "fecha": "2026-06-01T01:22:54.328Z"
+  },
+  {
+    "id": 1780277201591,
+    "identificacion": "4567890",
+    "candidato": "Fabio",
+    "fecha": "2026-06-01T01:26:41.591Z"
+  },
+  {
+    "id": 1780278657894,
+    "identificacion": "1780277055907",
+    "candidato": "aida",
+    "fecha": "2026-06-01T01:50:57.894Z"
+  },
+  {
+    "id": 1780281048137,
+    "identificacion": "000012",
+    "candidato": "David",
+    "fecha": "2026-06-01T02:30:48.137Z"
+  }
+]
