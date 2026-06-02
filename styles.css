@@ -277,3 +277,18 @@ footer {
     border-radius: 9px;
 }
 
+.barra-resultado {
+    width: 100%;
+    background-color: #f9eef3;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.barra-porcentaje {
+    height: 20px;
+    background-color: #c2185b;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+}

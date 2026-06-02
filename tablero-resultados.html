@@ -72,58 +72,59 @@
                     return resultados;
                 }
 
-                //despues de guardarlos los contamos para obtener el mayor votado
-
                 function calcularTotalVotos(resultados){
-                    let total = 0;
-
-                    resultados.forEach(function(resultado) {
-                        total = total + resultado.votos;
-                        });
-                    return total;
+                    return resultados.reduce(function(total, resultado) {
+                        return total + resultado.votos;
+                    }, 0);
                 }
 
-
                 function obtenerGanadorPedagogico(resultados) {
-    let mayor = null;
+                    let mayor = null;
 
-    resultados.forEach(function(resultado) {
-        if (mayor === null || resultado.votos > mayor.votos) {
-            mayor = resultado;
-        }
-    });
+                    resultados.forEach(function(resultado) {
+                        if (mayor === null || resultado.votos > mayor.votos) {
+                            mayor = resultado;
+                        }
+                    });
 
-    return mayor;
-}
+                    return mayor;
+                }
 
-btnCargarTablero.addEventListener("click", async function() {
-    const datos = await cargarDatos();
-    const resultados = calcularResultados(datos.candidatos, datos.votos);
-    const totalVotos = calcularTotalVotos(resultados);
-    const ganador = obtenerGanadorPedagogico(resultados);
+                btnCargarTablero.addEventListener("click", async function() {
+                    const datos = await cargarDatos();
+                    const resultados = calcularResultados(datos.candidatos, datos.votos);
+                    const totalVotos = calcularTotalVotos(resultados);
+                    const ganador = obtenerGanadorPedagogico(resultados);
 
-    resumenGeneral.innerHTML = `
-        <div class="tarjeta-guardada">
-            <p><strong>Total de votos registrados:</strong> ${totalVotos}</p>
-            <p><strong>Mayor resultado:</strong> ${ganador ? ganador.nombre : "Sin votos registrados"}</p>
-        </div>
-    `;
+                    resumenGeneral.innerHTML = `
+                        <div class="tarjeta-guardada">
+                            <p><strong>Total de votos registrados:</strong> ${totalVotos}</p>
+                            <p><strong>Mayor resultado:</strong> ${ganador ? ganador.nombre : "Sin votos registrados"}</p>
+                        </div>
+                    `;
 
-    contenedorTablero.innerHTML = "";
+                    contenedorTablero.innerHTML = "";
 
-    resultados.forEach(function(resultado) {
-        const tarjeta = document.createElement("div");
-        tarjeta.classList.add("tarjeta-guardada");
-        tarjeta.innerHTML = `
-            <h3>${resultado.nombre}</h3>
-            <p><strong>Rol:</strong> ${resultado.rol}</p>
-            <p><strong>Propuesta:</strong> ${resultado.propuesta}</p>
-            <p><strong>Votos:</strong> ${resultado.votos}</p>
-        `;
-        contenedorTablero.appendChild(tarjeta);
-    });
-});
+                    resultados.forEach(function(resultado) {
+                        const porcentaje = totalVotos > 0 ? Math.round((resultado.votos / totalVotos) * 100) : 0;
+                        const tarjeta = document.createElement("div");
+                        tarjeta.classList.add("tarjeta-guardada");
+                        tarjeta.innerHTML = `
+                            <h3>${resultado.nombre}</h3>
+                            <p><strong>Rol:</strong> ${resultado.rol}</p>
+                            <p><strong>Propuesta:</strong> ${resultado.propuesta}</p>
+                            <p><strong>Votos:</strong> ${resultado.votos}</p>
+                            <p><strong>Porcentaje:</strong> ${porcentaje}%</p>
 
+                            <div class="barra-resultado">
+                            <div class="barra-porcentaje" style="width: ${porcentaje}%;">
+                                ${porcentaje}%
+                                </div>
+                            </div>
+                        `;
+                        contenedorTablero.appendChild(tarjeta);
+                    });
+                });
 
         </script>
     
