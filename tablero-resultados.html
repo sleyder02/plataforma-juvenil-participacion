@@ -22,7 +22,7 @@
             <section>
                 <h2>Resultado por candidatos</h2>
                 <button id="btnCargarTablero" type="button">Cargar Tablero</button>
-                <div id="contenedorTablero"></div>
+                <div id="contenedorTablero" class="tarjeta-guardada"></div>
             </section>
 
             <section>
@@ -84,37 +84,45 @@
                 }
 
 
-                function obtenerGanadorPedagoggico(resultados){
-                    let Mayor = null;
+                function obtenerGanadorPedagogico(resultados) {
+    let mayor = null;
 
-                    resultados.forEach(function(resultado) {
-                        if(mayor === null || resultado.votos > mayor.votos){
-                            mayor = resultado;
-                        }
-                    });
+    resultados.forEach(function(resultado) {
+        if (mayor === null || resultado.votos > mayor.votos) {
+            mayor = resultado;
+        }
+    });
 
-                    return mayor;
-                }
+    return mayor;
+}
 
-                btnCargarTablero.addEventListener("click", async function() {
-                    const datos = await cargarDatos();
-                    const resultados = calcularResultados(datos.candidatos, datos.votos);
-                    const totalVotos = calcularTotalVotos(resultados);
-                    const ganador = obtenerGanadorPedagoggico(resultados);
+btnCargarTablero.addEventListener("click", async function() {
+    const datos = await cargarDatos();
+    const resultados = calcularResultados(datos.candidatos, datos.votos);
+    const totalVotos = calcularTotalVotos(resultados);
+    const ganador = obtenerGanadorPedagogico(resultados);
 
-                    console.log("Resultados:", resultados);
-                    console.log("Total de votos:", totalVotos);
-                    console.log("Mayor Resultado:", ganador);
+    resumenGeneral.innerHTML = `
+        <div class="tarjeta-guardada">
+            <p><strong>Total de votos registrados:</strong> ${totalVotos}</p>
+            <p><strong>Mayor resultado:</strong> ${ganador ? ganador.nombre : "Sin votos registrados"}</p>
+        </div>
+    `;
 
-                    resumenGeneral.innerHTML = `
-                    <div class="tarjeta-guardada">
-                       <p><strong>Total de votos registrados:</strong> ${totalVotos}</p>
-                       <p><strong>Mayor resultado:</strong> ${ganador? ganador.nombre : "Sin Votos registrados"} </p>
-                    </div>
-                    `;
+    contenedorTablero.innerHTML = "";
 
-                    
-                    });
+    resultados.forEach(function(resultado) {
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("tarjeta-guardada");
+        tarjeta.innerHTML = `
+            <h3>${resultado.nombre}</h3>
+            <p><strong>Rol:</strong> ${resultado.rol}</p>
+            <p><strong>Propuesta:</strong> ${resultado.propuesta}</p>
+            <p><strong>Votos:</strong> ${resultado.votos}</p>
+        `;
+        contenedorTablero.appendChild(tarjeta);
+    });
+});
 
 
         </script>
