@@ -50,7 +50,7 @@
         const WEBHOOK_N8N = "https://davidcaro.app.n8n.cloud/webhook-test/alerta-pedagogica";
 
         const btnEnviarAlerta = document.getElementById("btnEnviarAlerta");
-        const mensajeAlerta = document.getElementById(mensajeAlerta);
+        const mensajeAlerta = document.getElementById("mensajeAlerta");
 
         btnEnviarAlerta.addEventListener("click", async function (){
             const tipo = document.getElementById("tipoAlerta").value;
@@ -64,6 +64,7 @@
 
             const alerta = {
                 tipo: tipo,
+                descripcion: descripcion,
                 responsable: responsable,
                 origen: "Proyecto pedagògico Programadores para la Paz",
                 fecha: new Date().toString()
@@ -74,7 +75,7 @@
                 const respuesta = await fetch(WEBHOOK_N8N,{
                     method: "POST",
                     headers: {
-                        "Conten-type": "application/json"
+                        "Content-type": "application/json"
                     },
                     body: JSON.stringify(alerta)
                 });
