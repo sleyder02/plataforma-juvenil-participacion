@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta Pedagògica n8n</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+
+        <h1>Alerta Pedagògica con n8n</h1>
+        <p>Esta pantalla envis una alerta ficticia a n8n mediante un Webhook.
+            No uses datos reales.
+        </p>
+
+    </header>
+
+    <main>
+        <section>
+            <h2>Enviar alerta ficticia </h2>
+
+            <label for="tipoAlerta">Tipo de alerta</label>
+            <select id="tipoAlerta">
+                <option value="Orientacion">Orientaciòn</option>
+                <option value="Convivencia">Convivencia</option>
+                <option value="Protecciòn">Protecciòn</option>
+                <option value="Seguimiento de veeduria juvenil">Seguimiento de veedurìa juvenil</option>
+            </select>
+
+            <label for="descripcionAlerta">Descripciòn ficticia</label>
+            <textarea id="descripcionAlerta" rows="4" placeholder="Ejemplo: Se solicita orientaciòn Pedagògica sobre una informaciòn ficticia"></textarea>
+
+            <label for="responsableAlerta">Responsable Ficticio</label>
+            <input id="responsableAlerta" type="text" placeholder="Ejemplo: Equipo acadèmico">
+
+            <button id="btnEnviarAlerta" type="button">Enviar alerta a n8n</button>
+            <p id="mensajeAlerta"></p>
+        </section>
+
+        <section>
+            <a href="tablero-resultados.html">Volver al tablero</a>
+        </section>
+
+    </main>
+
+    <script>
+
+        const WEBHOOK_N8N = "https://davidcaro.app.n8n.cloud/webhook-test/alerta-pedagogica";
+
+        const btnEnviarAlerta = document.getElementById("btnEnviarAlerta");
+        const mensajeAlerta = document.getElementById(mensajeAlerta);
+
+        btnEnviarAlerta.addEventListener("click", async function (){
+            const tipo = document.getElementById("tipoAlerta").value;
+            const descripcion = document.getElementById("descripcionAlerta").value.trim();
+            const responsable = document.getElementById("responsableAlerta").value.trim();
+
+            if (!descripcion || !responsable) {
+                mensajeAlerta.textContent = "Completa la descripciòn ficticia y el responsable ficticio.";
+                return;
+            }
+
+            const alerta = {
+                tipo: tipo,
+                responsable: responsable,
+                origen: "Proyecto pedagògico Programadores para la Paz",
+                fecha: new Date().toString()
+
+            };
+
+            try{
+                const respuesta = await fetch(WEBHOOK_N8N,{
+                    method: "POST",
+                    headers: {
+                        "Conten-type": "application/json"
+                    },
+                    body: JSON.stringify(alerta)
+                });
+                if (respuesta.ok){
+                    mensajeAlerta.textContent = "Alerta ficiticia enviada correctamente a n8n.";
+
+                } else{
+                    mensajeAlerta.textContent = "La alerta fue enviada, pero no se respondio como se esperaba.";
+                }
+
+            } catch (error){
+                mensajeAlerta.textContent = "No se pudo conectar con el Webhook de n8n.";
+                console.error(error);
+            }
+            
+
+        });
+
+
+    </script>
+
+  
+</body>
+</html>
